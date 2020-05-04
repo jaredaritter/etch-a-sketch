@@ -4,8 +4,10 @@ let colorChoice = 'default';
 
 function changeColor() {
     if (colorChoice === 'default') {
+        this.classList.remove('silver');
         this.classList.add('painted');
     } else {
+        this.classList.remove('painted');
         this.classList.add('silver');
     }
 }
@@ -38,8 +40,18 @@ function makeGrid() {
     }
 }
 
+function silverToggle(e) {
+    if (colorChoice === 'default') {
+        colorChoice = 'silver';
+        e.target.style.backgroundColor = 'lightskyblue';
+    } else {
+        colorChoice = 'default';
+        e.target.style.backgroundColor = 'buttonface';
+    }
+}
+
 newGrid.addEventListener('click', makeGrid);
-silver.addEventListener('click', () => colorChoice = 'silver');
+silver.addEventListener('click', silverToggle);
 
 
 // functionality to input color choice?
