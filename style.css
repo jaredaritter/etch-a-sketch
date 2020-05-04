@@ -23,6 +23,7 @@ html, body {
     height: 100%;
     border: 1px solid black;
     background-color: cyan;
+    opacity: 1;
 }
 
 .painted {
@@ -31,4 +32,8 @@ html, body {
 
 .silver {
     background-color: silver;
+}
+
+.lighten {
+    opacity: 0.5;
 }

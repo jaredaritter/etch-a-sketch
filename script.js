@@ -1,14 +1,22 @@
 const newGrid = document.querySelector('#newGrid');
 const silver = document.querySelector('#silver');
+const lighten = document.querySelector('#lighten');
 let colorChoice = 'default';
+let opacity = 1;
 
 function changeColor() {
     if (colorChoice === 'default') {
+        this.classList.remove('lighten');
         this.classList.remove('silver');
         this.classList.add('painted');
-    } else {
+    } else if (colorChoice === 'silver') {
+        this.classList.remove('lighten');
         this.classList.remove('painted');
         this.classList.add('silver');
+    } else {
+        // this.classList.remove('painted');
+        // this.classList.remove('silver');
+        this.classList.add('lighten');
     }
 }
 
@@ -40,7 +48,7 @@ function makeGrid() {
     }
 }
 
-function silverToggle(e) {
+function toggleSilver(e) {
     if (colorChoice === 'default') {
         colorChoice = 'silver';
         e.target.style.backgroundColor = 'lightskyblue';
@@ -50,8 +58,19 @@ function silverToggle(e) {
     }
 }
 
+function toggleLighten(e) {
+    if (colorChoice === 'default') {
+        colorChoice = 'lighten';
+        e.target.style.backgroundColor = 'lightskyblue';
+    } else {
+        colorChoice = 'default';
+        e.target.style.backgroundColor = 'buttonface';
+    }
+}
+
 newGrid.addEventListener('click', makeGrid);
-silver.addEventListener('click', silverToggle);
+silver.addEventListener('click', toggleSilver);
+lighten.addEventListener('click', toggleLighten);
 
 
 // functionality to input color choice?
