@@ -1,7 +1,13 @@
 const newGrid = document.querySelector('#newGrid');
+const silver = document.querySelector('#silver');
+let colorChoice = 'default';
 
 function changeColor() {
-    this.classList.add('painted');
+    if (colorChoice === 'default') {
+        this.classList.add('painted');
+    } else {
+        this.classList.add('silver');
+    }
 }
 
 function clearGrid() {
@@ -33,3 +39,7 @@ function makeGrid() {
 }
 
 newGrid.addEventListener('click', makeGrid);
+silver.addEventListener('click', () => colorChoice = 'silver');
+
+
+// functionality to input color choice?

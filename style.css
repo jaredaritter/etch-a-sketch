@@ -1,12 +1,12 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-color: green;
+    background-color: lightgoldenrodyellow;
 }
 
-#newGrid {
+#buttons {
     margin: 10px auto;
-    display: block;
+    text-align: center;
 }
 
 #container {
@@ -27,4 +27,8 @@ html, body {
 
 .painted {
     background-color: teal;
+}
+
+.silver {
+    background-color: silver;
 }
