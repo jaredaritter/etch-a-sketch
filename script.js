@@ -90,7 +90,7 @@ function randomColor() {
 newGrid.addEventListener('click', makeGrid);
 silver.addEventListener('click', toggleSilver);
 lighten.addEventListener('click', toggleLighten);
-random.addEventListener('click', () => {
+random.addEventListener('click', () => {  // TODO: MAKE THIS A TOGGLE SWITCH
     colorChoice = 'random';
 });
 
