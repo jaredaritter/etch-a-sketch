@@ -13,7 +13,6 @@ function changeColor() {
         resetCell(this);
         this.classList.add('silver');
     } else if (colorChoice === 'lighten') {
-        // this.classList.add('lighten');
         lighten(this);
     } else if (colorChoice === 'random') {
         resetCell(this);
