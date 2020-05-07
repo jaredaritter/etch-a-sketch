@@ -4,7 +4,6 @@ const random = document.querySelector('#random');
 const lighten = document.querySelector('#lighten');
 
 let colorChoice = 'default';
-let opacity = 1;
 
 function changeColor() {
     if (colorChoice === 'default') {
@@ -18,7 +17,13 @@ function changeColor() {
     } else if (colorChoice === 'lighten') {
         // this.classList.remove('painted');
         // this.classList.remove('silver');
-        this.classList.add('lighten');
+        // this.classList.add('lighten');
+        if (!this.style.opacity) {
+            this.style.opacity = 1;
+        }
+        if (this.style.opacity > 0) {
+            this.style.opacity -= 0.1;
+        }
     } else if (colorChoice === 'random') {
         this.classList.remove('lighten');
         this.classList.remove('painted');
