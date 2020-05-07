@@ -1,22 +1,43 @@
+// FUTURE FEATURE CHECKLIST
+// * MAKE RANDOM BUTTON TOGGLE
+// * GIVE RGB INPUT BOXES FOR PICKING COLOR
+// * ADD DARKEN FEATURE
+// * CONSOLIDATE BUTTON TOGGLE FUNCTION
+// * TOGGLE LIGHTEN/DARKEN BUTTON LOGIC RETURNS TO DEFAULT. CHANGE TO LAST COLORCHOICE
+// * REORGANIZE FUNCTIONS FOR CLEARER GROUPING
+
 const newGrid = document.querySelector('#newGrid');
 const silverButton = document.querySelector('#silver');
 const randomButton = document.querySelector('#random');
 const lightenButton = document.querySelector('#lighten');
+const darkenButton = document.querySelector('#darken');
 
 let colorChoice = 'default';
+
+newGrid.addEventListener('click', makeGrid);
+silverButton.addEventListener('click', toggleSilverButton);
+randomButton.addEventListener('click', () => {  // TODO: MAKE THIS A TOGGLE SWITCH
+    colorChoice = 'random';
+});
+lightenButton.addEventListener('click', toggleLightenButton);
+darkenButton.addEventListener('click', toggleDarkenButton);
 
 function changeColor() {
     if (colorChoice === 'default') {
         resetCell(this);
-        this.classList.add('painted');
+        this.classList.add('default');
     } else if (colorChoice === 'silver') {
         resetCell(this);
         this.classList.add('silver');
-    } else if (colorChoice === 'lighten') {
-        lighten(this);
     } else if (colorChoice === 'random') {
         resetCell(this);
         this.style.backgroundColor = randomColor();
+    } else if (colorChoice === 'lighten') {
+        console.log(this.style.opacity);
+        lighten(this);
+    } else if (colorChoice === 'darken') {
+        console.log(this.style.opacity);
+        darken(this);
     }
 }
 
@@ -74,12 +95,31 @@ function toggleLightenButton(e) {
     }
 }
 
+function toggleDarkenButton(e) {
+    if (colorChoice === 'default') {
+        colorChoice = 'darken';
+        e.target.style.backgroundColor = 'lightskyblue';
+    } else {
+        colorChoice = 'default';
+        e.target.style.backgroundColor = 'buttonface';
+    }
+}
+
 function lighten(cell) {
     if (!cell.style.opacity) {
         cell.style.opacity = 1;
     }
     if (cell.style.opacity > 0) {
-        cell.style.opacity -= 0.1;
+        cell.style.opacity = Number(cell.style.opacity) - 0.1;
+    }
+}
+
+function darken(cell) {
+    if (!cell.style.opacity) {
+        cell.style.opacity = 1;
+    }
+    if (cell.style.opacity < 1) {
+        cell.style.opacity = Number(cell.style.opacity) + 0.1;
     }
 }
 
@@ -95,17 +135,7 @@ function randomColor() {
     return `rgb(${R}, ${G}, ${B})`;
 }
 
-newGrid.addEventListener('click', makeGrid);
-silverButton.addEventListener('click', toggleSilverButton);
-lightenButton.addEventListener('click', toggleLightenButton);
-randomButton.addEventListener('click', () => {  // TODO: MAKE THIS A TOGGLE SWITCH
-    colorChoice = 'random';
-});
 
-// FUNCTIONALITY CHECKLIST
-// * MAKE RANDOM BUTTON TOGGLE
-// * GIVE RGB INPUT BOXES FOR PICKING COLOR
-// * ADD DARKEN FEATURE
 
 // ASSESS FUNCTIONALITY OF RANDOM NUMBER GENERATOR AT 0 AND 255
 function checkHighLow(num) {
