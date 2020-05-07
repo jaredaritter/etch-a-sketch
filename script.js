@@ -7,21 +7,16 @@ let colorChoice = 'default';
 
 function changeColor() {
     if (colorChoice === 'default') {
-        this.classList.remove('lighten');
-        this.classList.remove('silver');
+        resetCell(this);
         this.classList.add('painted');
     } else if (colorChoice === 'silver') {
-        this.classList.remove('lighten');
-        this.classList.remove('painted');
+        resetCell(this);
         this.classList.add('silver');
     } else if (colorChoice === 'lighten') {
-        // this.classList.remove('painted');
-        // this.classList.remove('silver');
         // this.classList.add('lighten');
         lighten(this);
     } else if (colorChoice === 'random') {
-        this.classList.remove('lighten');
-        this.classList.remove('painted');
+        resetCell(this);
         this.style.backgroundColor = randomColor();
     }
 }
@@ -29,6 +24,11 @@ function changeColor() {
 function clearGrid() {
     const container = document.querySelector('#container')
     container.textContent = '';
+}
+
+function resetCell(cell) {
+    cell.classList = 'square';
+    if (cell.style.backgroundColor) cell.style.backgroundColor = "";
 }
 
 function getLength() {
@@ -75,12 +75,12 @@ function toggleLightenButton(e) {
     }
 }
 
-function lighten(item) {
-    if (!item.style.opacity) {
-        item.style.opacity = 1;
+function lighten(cell) {
+    if (!cell.style.opacity) {
+        cell.style.opacity = 1;
     }
-    if (item.style.opacity > 0) {
-        item.style.opacity -= 0.1;
+    if (cell.style.opacity > 0) {
+        cell.style.opacity -= 0.1;
     }
 }
 
