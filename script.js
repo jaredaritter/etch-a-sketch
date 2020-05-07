@@ -1,7 +1,5 @@
 // FUTURE FEATURE CHECKLIST
-// * MAKE RANDOM BUTTON TOGGLE
 // * GIVE RGB INPUT BOXES FOR PICKING COLOR
-// * ADD DARKEN FEATURE
 // * CONSOLIDATE BUTTON TOGGLE FUNCTION
 // * TOGGLE LIGHTEN/DARKEN BUTTON LOGIC RETURNS TO DEFAULT. CHANGE TO LAST COLORCHOICE
 // * REORGANIZE FUNCTIONS FOR CLEARER GROUPING
@@ -16,9 +14,7 @@ let colorChoice = 'default';
 
 newGrid.addEventListener('click', makeGrid);
 silverButton.addEventListener('click', toggleSilverButton);
-randomButton.addEventListener('click', () => {  // TODO: MAKE THIS A TOGGLE SWITCH
-    colorChoice = 'random';
-});
+randomButton.addEventListener('click', toggleRandomButton);
 lightenButton.addEventListener('click', toggleLightenButton);
 darkenButton.addEventListener('click', toggleDarkenButton);
 
@@ -33,10 +29,8 @@ function changeColor() {
         resetCell(this);
         this.style.backgroundColor = randomColor();
     } else if (colorChoice === 'lighten') {
-        console.log(this.style.opacity);
         lighten(this);
     } else if (colorChoice === 'darken') {
-        console.log(this.style.opacity);
         darken(this);
     }
 }
@@ -78,6 +72,16 @@ function makeGrid() {
 function toggleSilverButton(e) {
     if (colorChoice === 'default') {
         colorChoice = 'silver';
+        e.target.style.backgroundColor = 'lightskyblue';
+    } else {
+        colorChoice = 'default';
+        e.target.style.backgroundColor = 'buttonface';
+    }
+}
+
+function toggleRandomButton(e) {
+    if (colorChoice === 'default') {
+        colorChoice = 'random';
         e.target.style.backgroundColor = 'lightskyblue';
     } else {
         colorChoice = 'default';
