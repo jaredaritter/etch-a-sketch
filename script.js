@@ -1,7 +1,7 @@
 const newGrid = document.querySelector('#newGrid');
-const silver = document.querySelector('#silver');
-const random = document.querySelector('#random');
-const lighten = document.querySelector('#lighten');
+const silverButton = document.querySelector('#silver');
+const randomButton = document.querySelector('#random');
+const lightenButton = document.querySelector('#lighten');
 
 let colorChoice = 'default';
 
@@ -18,12 +18,7 @@ function changeColor() {
         // this.classList.remove('painted');
         // this.classList.remove('silver');
         // this.classList.add('lighten');
-        if (!this.style.opacity) {
-            this.style.opacity = 1;
-        }
-        if (this.style.opacity > 0) {
-            this.style.opacity -= 0.1;
-        }
+        lighten(this);
     } else if (colorChoice === 'random') {
         this.classList.remove('lighten');
         this.classList.remove('painted');
@@ -60,7 +55,7 @@ function makeGrid() {
     document.querySelectorAll('.square').forEach(square => square.addEventListener('mouseover', changeColor));
 }
 
-function toggleSilver(e) {
+function toggleSilverButton(e) {
     if (colorChoice === 'default') {
         colorChoice = 'silver';
         e.target.style.backgroundColor = 'lightskyblue';
@@ -70,13 +65,22 @@ function toggleSilver(e) {
     }
 }
 
-function toggleLighten(e) {
+function toggleLightenButton(e) {
     if (colorChoice === 'default') {
         colorChoice = 'lighten';
         e.target.style.backgroundColor = 'lightskyblue';
     } else {
         colorChoice = 'default';
         e.target.style.backgroundColor = 'buttonface';
+    }
+}
+
+function lighten(item) {
+    if (!item.style.opacity) {
+        item.style.opacity = 1;
+    }
+    if (item.style.opacity > 0) {
+        item.style.opacity -= 0.1;
     }
 }
 
@@ -93,14 +97,16 @@ function randomColor() {
 }
 
 newGrid.addEventListener('click', makeGrid);
-silver.addEventListener('click', toggleSilver);
-lighten.addEventListener('click', toggleLighten);
-random.addEventListener('click', () => {  // TODO: MAKE THIS A TOGGLE SWITCH
+silverButton.addEventListener('click', toggleSilverButton);
+lightenButton.addEventListener('click', toggleLightenButton);
+randomButton.addEventListener('click', () => {  // TODO: MAKE THIS A TOGGLE SWITCH
     colorChoice = 'random';
 });
 
-
-// functionality to input color choice?
+// FUNCTIONALITY CHECKLIST
+// * MAKE RANDOM BUTTON TOGGLE
+// * GIVE RGB INPUT BOXES FOR PICKING COLOR
+// * ADD DARKEN FEATURE
 
 // ASSESS FUNCTIONALITY OF RANDOM NUMBER GENERATOR AT 0 AND 255
 function checkHighLow(num) {
