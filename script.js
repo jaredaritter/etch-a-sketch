@@ -18,6 +18,8 @@ randomButton.addEventListener('click', toggleRandomButton);
 lightenButton.addEventListener('click', toggleLightenButton);
 darkenButton.addEventListener('click', toggleDarkenButton);
 
+makeGrid();
+
 function changeColor() {
     if (colorChoice === 'default') {
         resetCell(this);
@@ -46,11 +48,11 @@ function resetCell(cell) {
 }
 
 function getLength() {
-    let sideLength = Number(prompt('How long should each side be?'));
-    while (isNaN(sideLength)) {
-        sideLength = Number(prompt('How long should each side be?'));
+    let sideLength = Number(prompt('How long should each side be (0 - 128)?'));
+    while (isNaN(sideLength) || sideLength < 0 || sideLength > 128) {
+        sideLength = Number(prompt('How long should each side be (0 - 128)?'));
     }
-    return sideLength;
+    return Math.floor(sideLength);
 }
 
 function makeGrid() {
