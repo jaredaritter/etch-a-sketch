@@ -26,6 +26,10 @@ html, body {
     opacity: 1;
 }
 
+#default {
+    background-color: lightskyblue;
+}
+
 .default {
     background-color: teal;
 }

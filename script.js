@@ -1,42 +1,34 @@
 // FUTURE FEATURE CHECKLIST
 // * GIVE RGB INPUT BOXES FOR PICKING COLOR
-// * CONSOLIDATE BUTTON TOGGLE FUNCTION
-// * TOGGLE LIGHTEN/DARKEN BUTTON LOGIC RETURNS TO DEFAULT. CHANGE TO LAST COLORCHOICE
-// * REORGANIZE FUNCTIONS FOR CLEARER GROUPING
 
-const newGrid = document.querySelector('#newGrid');
-const silverButton = document.querySelector('#silver');
-const randomButton = document.querySelector('#random');
-const lightenButton = document.querySelector('#lighten');
-const darkenButton = document.querySelector('#darken');
+
+// SET EVENT LISTENERING FOR BUTTONS AND INITIALIZE GRID -----------------------------------------------
+
+document.querySelector('#newGrid').addEventListener('click', makeGrid);
+document.querySelectorAll('.option').forEach(button => button.addEventListener('click', toggleButton));
 
 let colorChoice = 'default';
-
-newGrid.addEventListener('click', makeGrid);
-silverButton.addEventListener('click', toggleButton);
-randomButton.addEventListener('click', toggleButton);
-lightenButton.addEventListener('click', toggleButton);
-darkenButton.addEventListener('click', toggleButton);
-
 makeGrid();
 
-// MAIN FUNCTIONS AND LOGIC -------------------------------------------------------------------------------
+// MAIN FUNCTION AND LOGIC -------------------------------------------------------------------------------
+    // DYNAMIC SETTING OF NUMBER OF COLUMNS TO MAINTAIN EQUAL HEIGHT AND WIDTH
+    // CREATES CELLS
+    // SETS MOUSEOVER LISTENERS
 
 function makeGrid() {
     clearGrid();
     const sideLength = getLength();
-    // DYNAMIC SETTING OF NUMBER OF COLUMNS TO MAINTAIN EQUAL HEIGHT AND WIDTH
     const container = document.querySelector('#container');
     container.setAttribute('style', 'grid-template-columns: repeat('+ sideLength +', 1fr)');
-    // CREATES CELLS
     for (let i = 0; i < sideLength ** 2; i++) {
         const div = document.createElement('div');
         div.classList.add('square');
         container.appendChild(div);
     }
-    // SETS MOUSEOVER LISTENERS
     document.querySelectorAll('.square').forEach(square => square.addEventListener('mouseover', changeColor));
 }
+
+// MOUSEOVER FUNCTION ----------------------------------------------------------------------------------------
 
 function changeColor() {
     if (colorChoice === 'default') {
@@ -87,17 +79,16 @@ function randomColor() {
     return `rgb(${R}, ${G}, ${B})`;
 }
 
-// TOGGLE BUTTONS -------------------------------------------------------------------------------------------
+// CLICKED BUTTON FUNCTIONS -------------------------------------------------------------------------------------------
 
 function toggleButton(e) {
-    console.log(e.target.id);
-    if (colorChoice === 'default') {
-        colorChoice = e.target.id;
-        e.target.style.backgroundColor = 'lightskyblue';
-    } else {
-        colorChoice = 'default';
-        e.target.style.backgroundColor = 'buttonface';
-    }
+    console.log(e);
+    const buttons = document.querySelectorAll('.option');
+    buttons.forEach(button => {
+        button.style.backgroundColor = 'buttonface';
+    })
+    colorChoice = e.target.id;
+    e.target.style.backgroundColor = 'lightskyblue';
 }
 
 function lighten(cell) {
