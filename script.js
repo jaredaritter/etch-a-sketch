@@ -20,6 +20,24 @@ darkenButton.addEventListener('click', toggleDarkenButton);
 
 makeGrid();
 
+// MAIN FUNCTIONS AND LOGIC -------------------------------------------------------------------------------
+
+function makeGrid() {
+    clearGrid();
+    const sideLength = getLength();
+    // DYNAMIC SETTING OF NUMBER OF COLUMNS TO MAINTAIN EQUAL HEIGHT AND WIDTH
+    const container = document.querySelector('#container');
+    container.setAttribute('style', 'grid-template-columns: repeat('+ sideLength +', 1fr)');
+    // CREATES CELLS
+    for (let i = 0; i < sideLength ** 2; i++) {
+        const div = document.createElement('div');
+        div.classList.add('square');
+        container.appendChild(div);
+    }
+    // SETS MOUSEOVER LISTENERS
+    document.querySelectorAll('.square').forEach(square => square.addEventListener('mouseover', changeColor));
+}
+
 function changeColor() {
     if (colorChoice === 'default') {
         resetCell(this);
@@ -36,6 +54,8 @@ function changeColor() {
         darken(this);
     }
 }
+
+// HELPER FUNCTIONS --------------------------------------------------------------------------------------------
 
 function clearGrid() {
     const container = document.querySelector('#container')
@@ -55,21 +75,19 @@ function getLength() {
     return Math.floor(sideLength);
 }
 
-function makeGrid() {
-    clearGrid();
-    const sideLength = getLength();
-    // DYNAMIC SETTING OF NUMBER OF COLUMNS TO MAINTAIN EQUAL HEIGHT AND WIDTH
-    const container = document.querySelector('#container');
-    container.setAttribute('style', 'grid-template-columns: repeat('+ sideLength +', 1fr)');
-    // CREATES CELLS
-    for (let i = 0; i < sideLength ** 2; i++) {
-        const div = document.createElement('div');
-        div.classList.add('square');
-        container.appendChild(div);
-    }
-    // SETS MOUSEOVER LISTENERS
-    document.querySelectorAll('.square').forEach(square => square.addEventListener('mouseover', changeColor));
+function randomNumber(max) {
+    let random = Math.floor(Math.random() * (max + 1));
+    return random;
 }
+
+function randomColor() {
+    const R = randomNumber(255);
+    const G = randomNumber(255);
+    const B = randomNumber(255);
+    return `rgb(${R}, ${G}, ${B})`;
+}
+
+// TOGGLE BUTTONS -------------------------------------------------------------------------------------------
 
 function toggleSilverButton(e) {
     if (colorChoice === 'default') {
@@ -129,21 +147,8 @@ function darken(cell) {
     }
 }
 
-function randomNumber(max) {
-    let random = Math.floor(Math.random() * (max + 1));
-    return random;
-}
+// ASSESS FUNCTIONALITY OF RANDOM NUMBER GENERATOR AT 0 AND 255 ----------------------------------------------------
 
-function randomColor() {
-    const R = randomNumber(255);
-    const G = randomNumber(255);
-    const B = randomNumber(255);
-    return `rgb(${R}, ${G}, ${B})`;
-}
-
-
-
-// ASSESS FUNCTIONALITY OF RANDOM NUMBER GENERATOR AT 0 AND 255
 function checkHighLow(num) {
     let low = 0;
     let high = 0;
