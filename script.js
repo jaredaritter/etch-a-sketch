@@ -1,5 +1,6 @@
 // FUTURE FEATURE CHECKLIST
 // * GIVE RGB INPUT BOXES FOR PICKING COLOR
+// * MAKE IT PRETTY
 
 
 // SET EVENT LISTENERING FOR BUTTONS AND INITIALIZE GRID -----------------------------------------------
@@ -82,7 +83,6 @@ function randomColor() {
 // CLICKED BUTTON FUNCTIONS -------------------------------------------------------------------------------------------
 
 function toggleButton(e) {
-    console.log(e);
     const buttons = document.querySelectorAll('.option');
     buttons.forEach(button => {
         button.style.backgroundColor = 'buttonface';
