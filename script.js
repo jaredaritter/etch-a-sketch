@@ -13,10 +13,10 @@ const darkenButton = document.querySelector('#darken');
 let colorChoice = 'default';
 
 newGrid.addEventListener('click', makeGrid);
-silverButton.addEventListener('click', toggleSilverButton);
-randomButton.addEventListener('click', toggleRandomButton);
-lightenButton.addEventListener('click', toggleLightenButton);
-darkenButton.addEventListener('click', toggleDarkenButton);
+silverButton.addEventListener('click', toggleButton);
+randomButton.addEventListener('click', toggleButton);
+lightenButton.addEventListener('click', toggleButton);
+darkenButton.addEventListener('click', toggleButton);
 
 makeGrid();
 
@@ -89,39 +89,10 @@ function randomColor() {
 
 // TOGGLE BUTTONS -------------------------------------------------------------------------------------------
 
-function toggleSilverButton(e) {
+function toggleButton(e) {
+    console.log(e.target.id);
     if (colorChoice === 'default') {
-        colorChoice = 'silver';
-        e.target.style.backgroundColor = 'lightskyblue';
-    } else {
-        colorChoice = 'default';
-        e.target.style.backgroundColor = 'buttonface';
-    }
-}
-
-function toggleRandomButton(e) {
-    if (colorChoice === 'default') {
-        colorChoice = 'random';
-        e.target.style.backgroundColor = 'lightskyblue';
-    } else {
-        colorChoice = 'default';
-        e.target.style.backgroundColor = 'buttonface';
-    }
-}
-
-function toggleLightenButton(e) {
-    if (colorChoice === 'default') {
-        colorChoice = 'lighten';
-        e.target.style.backgroundColor = 'lightskyblue';
-    } else {
-        colorChoice = 'default';
-        e.target.style.backgroundColor = 'buttonface';
-    }
-}
-
-function toggleDarkenButton(e) {
-    if (colorChoice === 'default') {
-        colorChoice = 'darken';
+        colorChoice = e.target.id;
         e.target.style.backgroundColor = 'lightskyblue';
     } else {
         colorChoice = 'default';
